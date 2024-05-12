@@ -1,0 +1,46 @@
+# Workflow Name
+name: CI Workflow
+# Events
+on:
+  pull_request:
+    branches:
+      - main
+      - soelz4
+  push:
+    branches:
+      - main
+      - soelz4
+# Jobs (Stages)
+jobs:
+  # 1st Job (Stage)
+  build:
+    name: "BUILD BINARY FILE"
+    defaults:
+      run:
+        shell: bash
+    # OS
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        name: "https://github.com/actions/checkout"
+      - run: make build
+        name: "Build Binary File"
+  # 2nd Job (Stage)
+  lint:
+    name: "RUN LINT"
+    defaults:
+      run:
+        shell: bash
+    # OS
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        name: "https://github.com/actions/checkout"
+      - uses: actions/setup-go@v5
+        name: "https://github.com/actions/setup-go"
+        with:
+          go-version: "1.22"
+      - uses: golangci/golangci-lint-action@v6
+        name: "https://github.com/golangci/golangci-lint-action"
+        with:
+          version: latest
