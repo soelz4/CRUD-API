@@ -25,6 +25,10 @@ build: ## 🔨 Build Binary File
 run: build ## 🏃 Run the Web Server Locally at PORT 8080
 	$(SRC_DIR)/$(BINARY_NAME)
 
+# Resolve Dependencies
+init: ## 📥 Download Dependencies From go.mod File
+	go mod download
+
 # Clean up Project
 clean: ## 🧹 Clean up Project
 	go clean
