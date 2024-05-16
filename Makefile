@@ -15,12 +15,12 @@ help:  ## 💬 This Help Message
 lint: ## 🔎 Lint & Format, will not Fix but Sets Exit Code on Error
 	gofmt -l $(SRC_DIR) \
 	&& gofmt -d $(SRC_DIR) \
-	&& golangci-lint run $(SRC_DIR)
+	&& golangci-lint run $(SRC_DIR)/...
 
 # Linting and Formatting with Try to Fix and Modify Code
 lint-fix: ## 📜 Lint & Format, will Try to Fix Errors and Modify Code
-	go fmt $(SRC_DIR) \
-	&& golangci-lint run $(SRC_DIR)
+	gofmt -w $(SRC_DIR) \
+	&& golangci-lint run $(SRC_DIR)/...
 
 # Build Binary File
 build: ## 🔨 Build Binary File
